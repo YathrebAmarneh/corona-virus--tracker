@@ -1,0 +1,36 @@
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.cardsContainer > div {
+  margin: 0px 5% 0px 0px;
+}
+
+.infected {
+  background-color: rgba(176, 215, 254, 255);
+  border-radius: 8px;
+  border-bottom: 15px solid rgba(88, 107, 254, 255);
+}
+
+.recovered {
+  background-color: rgba(221, 246, 225, 255);
+  border-radius: 8px;
+  border-bottom: 15px solid rgba(110, 249, 114, 255);
+}
+
+.deaths {
+  background-color: rgba(244, 214, 214, 255);
+  border-radius: 8px;
+  border-bottom: 15px solid rgba(250, 106, 107, 255);
+}
+
+@media (max-width: 750px) {
+  .cardsContainer {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
