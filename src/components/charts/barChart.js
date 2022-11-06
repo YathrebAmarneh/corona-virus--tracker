@@ -1,55 +1,80 @@
 import React, {useState, useEffect} from 'react';
-import {Bar, Chart, Line} from 'react-chartjs-2';
+import {Bar, Line} from 'react-chartjs-2';
 import {Chart as ChartJS} from 'chart.js/auto';
-// import {UserData} from '../../myData';
 import axios from 'axios';
-function BarChart() {
-  const [isFetched, setIsFetch] = useState(true);
-  const [coronaRecord, setCoronaRecord] = useState({});
-  // console.log(UserData);
-  // const arr = Object.values(coronaRecord).map((data) => data.value);
-  const labels = ['infected', 'recovered', 'deaths', 'Active'];
-  const [data, setData] = useState({
-    labels: labels.map((item) => item),
-    datasets: [
-      {
-        label: 'COVID-19 statistics',
-        data: coronaRecord.confirmed, //here is can not add confirmed value
-        backgroundColor: ['rgba(75,192,192,1)', 'white', 'rvalueed', '#f3ba2f'],
-        borderColor: 'black',
-        borderWidth: 2,
-      },
-    ],
-  });
+import styles from './charts.module.css';
+import {fetchData, fetchDailyData} from '../../API';
+function BarChart({data: {confirmed, recovered, deaths}, country}) {
+  const [dailyData, setDailyData] = useState({});
 
-  const getData = async () => {
-    setIsFetch(true);
-    const response = await axios.get(
-      'https://covid19.mathdro.id/api/confirmed'
-    );
-    const [arr] = response.data.filter(
-      (data) => data.countryRegion === 'Lithuania'
-    );
-    setCoronaRecord(arr);
-    setIsFetch(false);
-  };
-  // console.log(Object.values(coronaRecord));
   useEffect(() => {
-    getData();
+    const fetchMyAPI = async () => {
+      const initialDailyData = await fetchDailyData();
+
+      setDailyData(initialDailyData);
+    };
+
+    fetchMyAPI();
   }, []);
 
-  if (isFetched) {
-    return 'Data is Loading ...';
-  }
-  data.datasets.data = coronaRecord.confirmed;
-  console.log(coronaRecord.confirmed);
+  const barChart = confirmed ? (
+    <Bar
+      data={{
+        labels: ['Infected', 'Recovered', 'Deaths'],
+        datasets: [
+          {
+            label: 'People',
+            backgroundColor: [
+              'rgba(0, 0, 255, 0.5)',
+              'rgba(0, 255, 0, 0.5)',
+              'rgba(255, 0, 0, 0.5)',
+            ],
+            data: [confirmed.value, recovered.value, deaths.value],
+          },
+        ],
+      }}
+    />
+  ) : null;
+
+  const lineChart = dailyData[0] ? (
+    <Line
+      data={{
+        labels: dailyData.map(({date}) => new Date(date).toLocaleDateString()),
+        datasets: [
+          {
+            data: dailyData.map((data) => data.confirmed),
+            label: 'Infected',
+            borderColor: '#3333ff',
+            fill: true,
+          },
+          {
+            data: dailyData.map((data) => data.deaths),
+            label: 'Deaths',
+            borderColor: 'red',
+            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            fill: true,
+          },
+          {
+            data: dailyData.map((data) => data.recovered),
+            label: 'Recovered',
+            borderColor: 'green',
+            backgroundColor: 'rgba(0, 255, 0, 0.5)',
+            fill: true,
+          },
+        ],
+      }}
+    />
+  ) : null;
+
+  // data.datasets.data = coronaRecord.confirmed;
+  // console.log(coronaRecord.confirmed);
   // Object.values(coronaRecord).map((item) => console.log(item.value));
 
   // console.log(data);
   // coronaRecord.map((data) => {
   //   if (data.countryRegion === 'France') return data.confirmed;
   // })
-  return <Bar data={data} />;
+  return <div className={styles.charts}>{country ? barChart : lineChart}</div>;
 }
 
 export default BarChart;
