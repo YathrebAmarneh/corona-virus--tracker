@@ -2,6 +2,7 @@ import {fetchData} from './API';
 import Chart from './components/charts/barChart';
 import {useEffect, useState} from 'react';
 import styles from './App.module.css';
+import Cards from './components/Cards';
 
 function App() {
   const [dataFetched, setDataFetched] = useState({
@@ -22,7 +23,8 @@ function App() {
   const {data, country} = dataFetched;
   return (
     <div className={styles.container}>
-      <Chart data={data} country={'israel'} />
+      <Cards />
+      <Chart data={data} country={''} />
     </div>
   );
 }
