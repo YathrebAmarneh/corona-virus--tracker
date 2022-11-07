@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.container select {
+  width: 33%;
+  height: 40px;
+  cursor: pointer;
+  border-bottom: 2px solid blue;
+  outline: none;
+  background-color: rgb(245, 240, 240);
+}
