@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import styles from "./style.module.css";
-import axios from "axios";
-import Card from "./Card";
+import {useEffect, useState} from 'react';
+import styles from './style.module.css';
+import axios from 'axios';
+import Card from './Card';
 
-const Cards = ({ country }) => {
+const Cards = ({country}) => {
   const [data, setData] = useState([]);
   const [isFetch, setIsFetch] = useState([]);
   const getData = async () => {
     setIsFetch(true);
-    const response = await axios.get("https://covid19.mathdro.id/api");
-    console.log(response, "res");
+    const response = await axios.get('https://covid19.mathdro.id/api');
+    // console.log(response, "res");
 
     setData(response.data);
     setIsFetch(false);
@@ -20,7 +20,7 @@ const Cards = ({ country }) => {
   }, []);
 
   if (isFetch) {
-    return "Data is Loading ...";
+    return 'Data is Loading ...';
   }
 
   return (

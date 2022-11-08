@@ -1,8 +1,8 @@
-import style from "./style.module.css";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import style from './style.module.css';
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 
-const CountryPicker = ({ handleOnChange }) => {
+const CountryPicker = ({handleOnChange}) => {
   const [data, setData] = useState([]);
 
   const [isFetch, setIsFetch] = useState(true);
@@ -11,9 +11,9 @@ const CountryPicker = ({ handleOnChange }) => {
     setIsFetch(true);
 
     const response = await axios.get(
-      "https://covid19.mathdro.id/api/confirmed"
+      'https://covid19.mathdro.id/api/confirmed'
     );
-    console.log(response);
+    // console.log(response);
     setData(response.data);
     setIsFetch(false);
   };
@@ -23,10 +23,10 @@ const CountryPicker = ({ handleOnChange }) => {
   }, []);
 
   if (isFetch) {
-    return "Data is Loading ...";
+    return 'Data is Loading ...';
   }
 
-  console.log("countries names", data[0]);
+  // console.log("countries names", data[0]);
   return (
     <div className={style.container}>
       <select
