@@ -16,12 +16,6 @@ function App() {
     country: '',
   });
 
-  useEffect(() => {
-    const fetchDataUse = async () => {
-      setDataFetched({data});
-    };
-    fetchDataUse();
-  }, []);
   const {data, country} = dataFetched;
 
   const handleOnChange = async (country) => {
