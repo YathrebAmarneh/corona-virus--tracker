@@ -3,16 +3,7 @@ import styles from "./style.module.css";
 import axios from "axios";
 import Card from "./Card";
 
-const Cards = () => {
-  //   const [data, setData] = useState([]);
-  //   const getData = async () => {
-  //     const data = await axios.get("https://covid19.mathdro.id/api");
-  //     setData(data);
-  //   };
-  //   useEffect(() => {
-  //     getData();
-  //   }, []);
-
+const Cards = ({ country }) => {
   const [data, setData] = useState([]);
   const [isFetch, setIsFetch] = useState([]);
   const getData = async () => {

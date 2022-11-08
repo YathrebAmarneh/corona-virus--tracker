@@ -1,52 +1,43 @@
-<<<<<<< HEAD
 import "./App.css";
-import CountryPicker from "./components/country-picker";
 import Introduction from "./components/Introduction";
-=======
->>>>>>> d8b32011340c50502323dd84209fdfbd0f47a812
-import {fetchData} from './API';
-import Chart from './components/charts/barChart';
-import {useEffect, useState} from 'react';
-import styles from './App.module.css';
-import Cards from './components/Cards';
-<<<<<<< HEAD
-=======
-import CountryPicker from './components/country-picker';
-import Introduction from './components/Introduction';
->>>>>>> d8b32011340c50502323dd84209fdfbd0f47a812
+import { fetchData } from "./API";
+import Chart from "./components/charts/barChart";
+import { useEffect, useState } from "react";
+import styles from "./App.module.css";
+import Cards from "./components/Cards";
+import Card from "./components/Cards/Card";
+import CountryPicker from "./components/country-picker";
 
 function App() {
+  const [countryName, setCountryName] = useState("");
+
   const [dataFetched, setDataFetched] = useState({
     data: {},
-    country: 'israel',
+    country: "israel",
   });
 
   useEffect(() => {
     const fetchDataUse = async () => {
       const data = await fetchData();
 
-      setDataFetched({data});
+      setDataFetched({ data });
     };
     fetchDataUse();
   }, []);
-  // console.log(data);
 
-  const {data, country} = dataFetched;
+  const { data, country } = dataFetched;
+
+  const handleOnChange = (country) => {
+    setCountryName(country);
+    console.log("country from picker", country);
+  };
+
   return (
-<<<<<<< HEAD
     <div className="App">
-=======
-    <div className={styles.container}>
->>>>>>> d8b32011340c50502323dd84209fdfbd0f47a812
       <Introduction />
-      <Cards />
-      <CountryPicker />
-<<<<<<< HEAD
-    {/* <div className={styles.container}> */}
-      <Cards />
-=======
->>>>>>> d8b32011340c50502323dd84209fdfbd0f47a812
-      <Chart data={data} country={''} />
+      <Cards countryName={countryName} />
+      <CountryPicker handleOnChange={handleOnChange} />
+      <Chart countryName={countryName} data={data} country={""} />
     </div>
   );
 }

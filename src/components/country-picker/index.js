@@ -2,7 +2,7 @@ import style from "./style.module.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const CountryPicker = () => {
+const CountryPicker = ({ handleOnChange }) => {
   const [data, setData] = useState([]);
 
   const [isFetch, setIsFetch] = useState(true);
@@ -11,7 +11,7 @@ const CountryPicker = () => {
     setIsFetch(true);
 
     const response = await axios.get(
-      "https://covid19.mathdro.id/api/countries"
+      "https://covid19.mathdro.id/api/confirmed"
     );
     console.log(response);
     setData(response.data);
@@ -26,14 +26,22 @@ const CountryPicker = () => {
     return "Data is Loading ...";
   }
 
-  console.log("countries names", data.countries);
+  console.log("countries names", data[0]);
   return (
     <div className={style.container}>
-      <select name="cars" id="cars">
+      <select
+        name="cars"
+        id="cars"
+        onChange={(e) => handleOnChange(e.target.value)}
+      >
         <option value="global">Global</option>
 
-        {data.countries.map((item) => {
-          return <option>{item.name}</option>;
+        {data.map((item) => {
+          return (
+            <option value={`${item.countryRegion}`}>
+              {item.countryRegion}
+            </option>
+          );
         })}
       </select>
     </div>
