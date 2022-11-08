@@ -19,12 +19,8 @@ function App() {
   const {data, country} = dataFetched;
 
   const handleOnChange = async (country) => {
-    let data;
-    if (country) {
-      data = await fetchData(country);
-    } else {
-      data = await fetchData();
-    }
+    const data = await fetchData(country);
+
     setDataFetched({data, country: {country}});
     setCountryName(country);
     // console.log(country);
