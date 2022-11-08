@@ -34,7 +34,7 @@ const CountryPicker = ({handleOnChange}) => {
         id="cars"
         onChange={(e) => handleOnChange(e.target.value)}
       >
-        <option value="global">Global</option>
+        <option value="">Global</option>
 
         {data.map((item) => {
           return (

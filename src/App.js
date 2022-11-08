@@ -13,32 +13,36 @@ function App() {
 
   const [dataFetched, setDataFetched] = useState({
     data: {},
-    country: 'israel',
+    country: '',
   });
 
   useEffect(() => {
     const fetchDataUse = async () => {
-      const data = await fetchData();
-
       setDataFetched({data});
     };
     fetchDataUse();
   }, []);
-
   const {data, country} = dataFetched;
 
-  const handleOnChange = (country) => {
+  const handleOnChange = async (country) => {
+    let data;
+    if (country) {
+      data = await fetchData(country);
+    } else {
+      data = await fetchData();
+    }
+    setDataFetched({data, country: {country}});
     setCountryName(country);
     // console.log(country);
-    console.log('country from picker', countryName);
+    console.log('country from picker', country);
   };
 
   return (
     <div className="App">
       <Introduction />
-      {/* <Cards countryName={countryName} /> */}
-      {/* <CountryPicker handleOnChange={handleOnChange} /> */}
-      <Chart data={data} country={'iraq'} />
+      <Cards countryName={countryName} />
+      <CountryPicker handleOnChange={handleOnChange} />
+      <Chart data={data} country={countryName} />
     </div>
   );
 }

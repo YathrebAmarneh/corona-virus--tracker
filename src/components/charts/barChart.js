@@ -5,6 +5,7 @@ import axios from 'axios';
 import styles from './charts.module.css';
 import {fetchData, fetchDailyData} from '../../API';
 function BarChart({data: {confirmed, recovered, deaths}, country}) {
+  console.log('my country is : ', country);
   const [dailyData, setDailyData] = useState({});
 
   useEffect(() => {
