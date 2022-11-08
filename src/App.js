@@ -37,7 +37,7 @@ function App() {
       <Introduction />
       <Cards countryName={countryName} />
       <CountryPicker handleOnChange={handleOnChange} />
-      <Chart countryName={countryName} data={data} country={""} />
+      <Chart data={data} country={countryName} />
     </div>
   );
 }
