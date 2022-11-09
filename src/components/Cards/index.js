@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react';
-import styles from './style.module.css';
-import axios from 'axios';
-import Card from './Card';
+import { useEffect, useState } from "react";
+import styles from "./style.module.css";
+import axios from "axios";
+import Card from "./Card";
 
-const Cards = ({country}) => {
-  const [data, setData] = useState([]);
+const Cards = ({ data, country }) => {
+  const [cdata, setData] = useState([]);
   const [isFetch, setIsFetch] = useState([]);
   const getData = async () => {
     setIsFetch(true);
@@ -22,37 +22,44 @@ const Cards = ({country}) => {
   if (isFetch) {
     return 'Data is Loading ...';
   }
+  console.log({ data });
 
-  return (
-    <div>
-      <div className={styles.cardsContainer}>
-        <div className={styles.infected}>
-          <Card
-            title="infected"
-            value={data.confirmed.value}
-            lastUpdate={data.lastUpdate}
-            labelText="Number of infect cases of COVID-19"
-          />
-        </div>
-        <div className={styles.recovered}>
-          <Card
-            title="Recovered"
-            value={data.recovered.value}
-            lastUpdate={data.lastUpdate}
-            labelText="Number of recoveries cases of COVID-19"
-          />
-        </div>
-        <div className={styles.deaths}>
-          <Card
-            title="deaths"
-            value={data.deaths.value}
-            lastUpdate={data.lastUpdate}
-            labelText="Number of deaths cases of COVID-19"
-          />
+  if (!data.confirmed) {
+    return "loading...";
+  }
+    return (
+      <div>
+        <div className={styles.cardsContainer}>
+          <div className={styles.infected}>
+            <Card
+              title="infected"
+              value={data.confirmed.value}
+              lastUpdate={data.lastUpdate}
+              labelText="Number of infect cases of COVID-19"
+              country={country}
+            />
+          </div>
+          <div className={styles.recovered}>
+            <Card
+              title="Recovered"
+              value={data.recovered.value}
+              lastUpdate={data.lastUpdate}
+              labelText="Number of recoveries cases of COVID-19"
+              country={country}
+            />
+          </div>
+          <div className={styles.deaths}>
+            <Card
+              title="deaths"
+              value={data.deaths.value}
+              lastUpdate={data.lastUpdate}
+              labelText="Number of deaths cases of COVID-19"
+              country={country}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default Cards;

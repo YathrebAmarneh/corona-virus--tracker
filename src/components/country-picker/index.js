@@ -36,9 +36,9 @@ const CountryPicker = ({handleOnChange}) => {
       >
         <option value="">Global</option>
 
-        {data.map((item) => {
+        {data.map((item,index) => {
           return (
-            <option value={`${item.countryRegion}`}>
+            <option value={`${item.countryRegion}`} key={index}>
               {item.countryRegion}
             </option>
           );
