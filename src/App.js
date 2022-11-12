@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <Introduction />
-      <Cards countryName={countryName} />
+      <Cards data={ data} country={countryName} />
       <CountryPicker handleOnChange={handleOnChange} />
       <Chart data={data} country={countryName} />
     </div>
