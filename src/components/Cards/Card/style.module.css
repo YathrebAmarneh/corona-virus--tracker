@@ -29,3 +29,8 @@
 .DateTimeString {
   opacity: 0.6;
 }
+
+.country{
+  font-size: 18px;
+  font-weight: 600;
+}

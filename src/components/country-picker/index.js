@@ -1,8 +1,8 @@
-import style from './style.module.css';
-import axios from 'axios';
-import {useState, useEffect} from 'react';
+import style from "./style.module.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-const CountryPicker = ({handleOnChange}) => {
+const CountryPicker = ({ handleOnChange }) => {
   const [data, setData] = useState([]);
 
   const [isFetch, setIsFetch] = useState(true);
@@ -11,7 +11,7 @@ const CountryPicker = ({handleOnChange}) => {
     setIsFetch(true);
 
     const response = await axios.get(
-      'https://covid19.mathdro.id/api/confirmed'
+      "https://covid19.mathdro.id/api/confirmed"
     );
     // console.log(response);
     setData(response.data);
@@ -23,7 +23,7 @@ const CountryPicker = ({handleOnChange}) => {
   }, []);
 
   if (isFetch) {
-    return 'Data is Loading ...';
+    return "Data is Loading ...";
   }
 
   // console.log("countries names", data[0]);
@@ -36,9 +36,9 @@ const CountryPicker = ({handleOnChange}) => {
       >
         <option value="">Global</option>
 
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
-            <option value={`${item.countryRegion}`}>
+            <option value={`${item.countryRegion}`} key={index}>
               {item.countryRegion}
             </option>
           );
