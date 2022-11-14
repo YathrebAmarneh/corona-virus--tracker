@@ -26,7 +26,39 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate }, country }) 
   // console.log({ data });
 
   if (!confirmed) {
-    return "loading...";
+    return (
+      <div>
+        <div className={styles.cardsContainer}>
+          <div className={styles.infected}>
+            <Card
+              title="infected"
+              value={"635204029"}
+              lastUpdate={""}
+              labelText="Number of infect cases of COVID-19"
+              country={country}
+            />
+          </div>
+          <div className={styles.recovered}>
+            <Card
+              title="Recovered"
+              value={"0"}
+              lastUpdate={""}
+              labelText="Number of recoveries cases of COVID-19"
+              country={country}
+            />
+          </div>
+          <div className={styles.deaths}>
+            <Card
+              title="deaths"
+              value={"6610184"}
+              lastUpdate={""}
+              labelText="Number of deaths cases of COVID-19"
+              country={country}
+            />
+          </div>
+        </div>
+      </div>
+    );
   }
     return (
       <div>
